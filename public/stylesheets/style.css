@@ -99,9 +99,10 @@ section {
   color: #0000ff;
 }
 
-.message-timestamp {
+.message-details {
   color: #888;
-  font-size: x-small;
+  font-size: 12px;
+  margin-top: 1px;
 }
 
 h1 {
