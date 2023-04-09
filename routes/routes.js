@@ -33,4 +33,16 @@ router.get("/become-member", userController.become_member_get);
 /* POST Become Member */
 router.post("/become-member", userController.become_member_post);
 
+// /*POST Delete Message by User */
+router.post(
+  "/message/:id/user-delete",
+  messageController.user_delete_message_post
+);
+
+/* POST Delete Message by Admin */
+router.post(
+  "/message/:id/admin-delete",
+  messageController.admin_delete_message_post
+);
+
 module.exports = router;
