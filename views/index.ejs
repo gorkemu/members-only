@@ -8,37 +8,38 @@
       <%- include('partials/header') -%>
       <main>
       <% if (currentUser) {%>
-        
-        <% if (messages.length===0) {%>
-          <h1>No messages yet!</h1>
-          <% } else {%>
-            <section class="become-member">
-            <p>You must be a member to view the authors and dates of messages.</p>
-            <a href="/become-member"><button>Become a member</button></a>
-          </section>
-          <section class="create-message">
-            <a href="/create-message" class="create-message-link">Create a new message</a>
-          </section>
-          <section class="messages">
-            <% messages.forEach((message)=> {%>
-              <article class="message">
-                <h2 class="message-title"><%= message.title %></h2>
-                <p class="message-content"><%= message.content %></p>
-                <div class="message-timestamp"><span><%= message.timestamp_ago %></span></div>
-              </article>
-              <% }) }%>
-                <% %>
+        <% if (!currentUser.member) {%>
+        <section class="become-member">
+          <p>You must be a member to view the authors and dates of messages.</p>
+          <a href="/become-member"><button>Become a member</button></a>
         </section>
-      <% } else { %>
-        
+        <%}
+        %>
+        <section class="create-message">
+          <a href="/create-message" class="create-message-link">Create a new message</a>
+        </section>
+        <section class="messages">
+          <% messages.forEach((message)=> {%>
+            <article class="message">
+              <h2 class="message-title"><%= message.title %></h2>
+              <p class="message-content"><%= message.content %></p>
+              <% if (currentUser.member) { %>
+                <div class="message-details"><span>
+                    submitted <%= message.timestamp_ago %> by <%= message.user.username %>
+                  </span></div>
+              <%} %>
+            </article>
+            <%}) 
+          %> 
+        </section>
+       <%} else {%>
           <a href="/sign-up">
             <button>Sign Up</button>
           </a>
-
           <a href="/login">
             <button>Login</button>
           </a>
-      <%}%>
+      <%} %>
       </main>
       
   </body>
