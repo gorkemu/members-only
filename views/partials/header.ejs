@@ -1,0 +1,12 @@
+<header class="main-header">
+    <nav class="main-header__nav">
+        <ul class="main-header__list">
+            <li class="main-header__home"><a href="/">Home</a></li>
+            <% if (currentUser) {%>
+                <li><%=currentUser.username %></li>
+                <li><a href="/logout">Logout</a></li>
+                <% }
+            %>
+        </ul>
+    </nav>
+</header>
