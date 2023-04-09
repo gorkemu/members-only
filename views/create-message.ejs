@@ -9,15 +9,17 @@
 </head>
 
 <body>
-        <div>
-            <form method="post" action="">
-                <label for="title">Title</label>
+    <%- include('partials/header') -%>
+    <main class="create-message">
+        <h1>Submit a new message</h1>
+        <section class="form-container">
+            <form method="post" action="" class="create-message-form">
                 <input name="title" placeholder="title" type="text" required="true" maxlength="100" />
-                <label for="content">Content</label>
-                <input name="content" placeholder="content" type="text" required="true" maxlength="1000" />
+                <textarea name="content" placeholder="content" type="text" required="true" maxlength="1000" rows="4" cols="50"></textarea>
                 <button>Submit</button>
             </form>
-        </div>
+        </section>
+    </main>
 </body>
 
 </html>
