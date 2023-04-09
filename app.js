@@ -12,7 +12,13 @@ const User = require("./models/userModel");
 require("dotenv").config();
 const mongoose = require("mongoose");
 const mongoDB = process.env.MONGODB_URI;
-mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
+main().catch((err) => console.log(err));
+async function main() {
+  await mongoose.connect(mongoDB, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+}
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "mongo connection error"));
 
