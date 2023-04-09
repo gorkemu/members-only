@@ -9,20 +9,34 @@
 </head>
 
 <body>
+
     <%- include('partials/header') -%>
-    <h1>Sign up</h1>
-    <section class="form-container">
-        <form action="" method="POST">
-            <input name="username" placeholder="username" type="text" />
-            <input name="password" placeholder="password" type="password" />
-            <button>Sign up</button>
-        </form>
-        <p>Already have an account? 
-            <a href="/login">
-                <button>Login</button>
-            </a>
-        </p>
-    </section>
+    <main class="sign-up">
+        <h1>Sign up</h1>
+        <% if (errors) {%> 
+        <div class="errors">
+            <ul class="errors">
+            <% errors.forEach((error)=> {%>
+                <li>
+                    <%= error.msg %>
+                </li>
+                <%}) %>
+            </ul>
+        </div>
+        <%}%>
+        <section class="form-container">
+            <form action="" method="POST" class="signup-form">
+                <input name="username" placeholder="username" type="text" />
+                <input name="password" placeholder="password" type="password" />
+                <button>Sign up</button>
+            </form>
+            <p>Already have an account? 
+                <a href="/login">
+                    <button>Login</button>
+                </a>
+            </p>
+        </section>
+    </main>
 </body>
 
 </html>
