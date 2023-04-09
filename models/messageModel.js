@@ -10,10 +10,13 @@ const MessageSchema = new Schema({
 });
 
 // Virtual for formatted timestamp
-MessageSchema.virtual("timestamp_formatted").get(() => {
-  return DateTime.fromJSDate(this.timestamp).toLocaleString(
-    DateTime.DATETIME_MED
-  );
+MessageSchema.virtual("timestamp_formatted").get(function () {
+  return DateTime.fromJSDate(this.timestamp).toISODate(); // format 'YYYY-MM-DD'
+});
+
+// Virtual for date ago
+MessageSchema.virtual("timestamp_ago").get(function () {
+  return DateTime.fromJSDate(this.timestamp).toRelative(); // format '2 days ago'
 });
 
 module.exports = mongoose.model("Message", MessageSchema);
