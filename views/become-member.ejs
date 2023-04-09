@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+    <%- include('partials/header') -%>
+    <div>
+        <form method="post" action="">
+            <h1>Enter your member code</h1>
+            <input name="member_code" placeholder="Enter member code" type="password" required="true" maxlength="100" />
+            <button>Submit</button>
+        </form>
+    </div>
+</body>
+
+</html>
