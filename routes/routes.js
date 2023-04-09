@@ -3,6 +3,7 @@ const router = express.Router();
 const indexController = require("../controllers/indexController");
 const authController = require("../controllers/authController");
 const messageController = require("../controllers/messageController");
+const userController = require("../controllers/userController");
 
 /* GET home page. */
 router.get("/", indexController.index);
@@ -25,5 +26,11 @@ router.get("/create-message", messageController.create_message_get);
 
 /* POST Create Message */
 router.post("/create-message", messageController.create_message_post);
+
+/* GET Become Member */
+router.get("/become-member", userController.become_member_get);
+
+/* POST Become Member */
+router.post("/become-member", userController.become_member_post);
 
 module.exports = router;
