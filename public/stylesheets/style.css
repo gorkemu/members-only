@@ -60,11 +60,17 @@ main {
   padding: 15px;
 }
 
+.sign-up, .log-in, .create-message, .become-member {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 section {
   margin-bottom: 20px;
 }
 
-.become-member {
+.become-member, .admin-view {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -105,14 +111,6 @@ section {
   margin-top: 1px;
 }
 
-h1 {
-  font-size: 16px;
-  font-weight: bold;
-  margin: 0 auto;
-  padding: 10px;
-  text-align: center;
-}
-
 .buttons {
   display: flex;
   justify-content: center;
@@ -134,18 +132,35 @@ button {
   align-items: center;
 }
 
-form {
+.signup-form, .login-form, .create-message-form, .become-member-form {
   display: flex;
   flex-direction: column;
-  width: 300px;
+  width: 400px;
   margin: 0 auto;
   padding: 10px;
 }
 
-input {
+input, textarea {
   border: 1px solid #ccc;
   padding: 5px 10px;
   font: inherit;
   color: #111111;
   margin: 10px;
+}
+
+textarea {
+  height: 150px;
+  resize: none;
+}
+.errors {
+  margin-top: 20px;
+}
+
+.errors li {
+  color: red;
+  list-style: none;
+}
+
+.delete-message-btn {
+  margin: 2px 0;
 }
