@@ -57,3 +57,19 @@ exports.sign_up_post = [
     }
   },
 ];
+
+exports.login_get = (req, res, next) => {
+  if (res.locals.currentUser) return res.redirect("/");
+  res.render("login", { title: "Login" });
+};
+
+exports.login_post = passport.authenticate("local", {
+  successRedirect: "/",
+  failureRedirect: "/login",
+});
+
+exports.logout_get = (req, res, next) => {
+  req.logout(() => {
+    res.redirect("/");
+  });
+};
