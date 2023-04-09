@@ -43,3 +43,29 @@ exports.create_message_post = [
     }
   },
 ];
+
+/* User delete message */
+exports.user_delete_message_post = async (req, res, next) => {
+  if (!res.locals.currentUser) return res.redirect("/login");
+  try {
+    const message = await Message.findById(req.params.id);
+    if (message.user._id.toString() === res.locals.currentUser._id.toString()) {
+      await Message.findByIdAndDelete(req.params.id);
+    }
+    res.redirect("/");
+  } catch (err) {
+    return next(err);
+  }
+};
+
+/* Admin delete message */
+exports.admin_delete_message_post = async (req, res, next) => {
+  if (!res.locals.currentUser) return res.redirect("/login");
+  if (!res.locals.currentUser.admin) return res.redirect("/");
+  try {
+    await Message.findByIdAndDelete(req.params.id);
+    res.redirect("/");
+  } catch (err) {
+    return next(err);
+  }
+};
