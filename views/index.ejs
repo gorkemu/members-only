@@ -8,26 +8,43 @@
       <%- include('partials/header') -%>
       <main>
       <% if (currentUser) {%>
-        <% if (!currentUser.member) {%>
+        <% if (!currentUser.member && !currentUser.admin) {%>
         <section class="become-member">
           <p>You must be a member to view the authors and dates of messages.</p>
           <a href="/become-member"><button>Become a member</button></a>
         </section>
         <%}
         %>
+        <% if (currentUser.admin) {%>
+          <section class="admin-view">
+            <p>Hello Admin. Please delete inapropriate messages</p>
+          </section>
+          <%} %>
         <section class="create-message">
-          <a href="/create-message" class="create-message-link">Create a new message</a>
+          <a href="/create-message" class="create-message-link">Submit a new message</a>
         </section>
         <section class="messages">
           <% messages.forEach((message)=> {%>
             <article class="message">
               <h2 class="message-title"><%= message.title %></h2>
               <p class="message-content"><%= message.content %></p>
-              <% if (currentUser.member) { %>
+              <% if (currentUser.member || currentUser.admin) { %>
                 <div class="message-details"><span>
                     submitted <%= message.timestamp_ago %> by <%= message.user.username %>
                   </span></div>
               <%} %>
+              <% if (currentUser.admin) {%>
+                <form action="/message/<%= message._id %>/admin-delete" method="POST" class="delete-message-form">
+                  <input type="hidden" name="messageId" value="<%= message._id %>" />
+                  <button class="delete-message-btn">Delete</button>
+                </form>
+                <%} %>
+              <% if (message.user._id.toString() === currentUser._id.toString()) {%>
+                <form action="/message/<%= message._id %>/user-delete" method="POST" class="delete-message-form">
+                  <input type="hidden" name="messageId" value="<%= message._id %>" />
+                  <button class="delete-message-btn">Delete</button>
+                </form>
+                <%} %>
             </article>
             <%}) 
           %> 
