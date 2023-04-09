@@ -6,18 +6,40 @@
   </head>
   <body>
       <% if (currentUser) {%>
-        <h1>WELCOME BACK <%= user.username %>
+        <h1>WELCOME BACK <%= currentUser.username %>
         </h1>
-        <a href="/log-out">LOG OUT</a>
+        <a href="/logout">LOG OUT</a>
+
+        <a href="/create-message">CREATE MESSAGE</a>
       <% } else { %>
-        <h1>please log in</h1>
-        <form action="/log-in" method="POST">
-          <label for="username">Username</label>
-          <input name="username" placeholder="username" type="text" />
-          <label for="password">Password</label>
-          <input name="password" type="password" />
-          <button>Log In</button>
-        </form>
+        
+          <a href="/sign-up">
+            <button>Sign Up</button>
+          </a>
+
+          <a href="/login">
+            <button>Login</button>
+          </a>
       <%}%>
+      <% if (messages.length === 0) {%>
+          <h1>No messages yet!</h1>
+        <% } else {%>
+          <h1>Messages</h1>
+          <p>
+            You must be a member to view the authors and dates of messages.
+          </p>
+          <% messages.forEach((message)=> {%>
+            <div>
+              <h2>
+                <%= message.title %>
+              </h2>
+              <p>
+                <%= message.content %>
+              </p>
+            </div>
+          <% }) 
+        }%>
+        <%
+      %>
   </body>
 </html>
