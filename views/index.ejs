@@ -5,12 +5,30 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
+      <%- include('partials/header') -%>
+      <main>
       <% if (currentUser) {%>
-        <h1>WELCOME BACK <%= currentUser.username %>
-        </h1>
-        <a href="/logout">LOG OUT</a>
-
-        <a href="/create-message">CREATE MESSAGE</a>
+        
+        <% if (messages.length===0) {%>
+          <h1>No messages yet!</h1>
+          <% } else {%>
+            <section class="become-member">
+            <p>You must be a member to view the authors and dates of messages.</p>
+            <a href="/become-member"><button>Become a member</button></a>
+          </section>
+          <section class="create-message">
+            <a href="/create-message" class="create-message-link">Create a new message</a>
+          </section>
+          <section class="messages">
+            <% messages.forEach((message)=> {%>
+              <article class="message">
+                <h2 class="message-title"><%= message.title %></h2>
+                <p class="message-content"><%= message.content %></p>
+                <div class="message-timestamp"><span><%= message.timestamp_ago %></span></div>
+              </article>
+              <% }) }%>
+                <% %>
+        </section>
       <% } else { %>
         
           <a href="/sign-up">
@@ -21,25 +39,7 @@
             <button>Login</button>
           </a>
       <%}%>
-      <% if (messages.length === 0) {%>
-          <h1>No messages yet!</h1>
-        <% } else {%>
-          <h1>Messages</h1>
-          <p>
-            You must be a member to view the authors and dates of messages.
-          </p>
-          <% messages.forEach((message)=> {%>
-            <div>
-              <h2>
-                <%= message.title %>
-              </h2>
-              <p>
-                <%= message.content %>
-              </p>
-            </div>
-          <% }) 
-        }%>
-        <%
-      %>
+      </main>
+      
   </body>
 </html>
