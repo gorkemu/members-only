@@ -6,7 +6,7 @@
 
 A basic Express app using passport.js, bcrypt, Mongoose and EJS.
 
-- Registered users can post anonymous messages, see the title and content of other users, delete their messages.
+- Registered users can post messages, delete their own messages, see the title and content of other users.
 - Users who enter secret code become member and see other information like usernames and date of messages.
 - Admin can view all information and delete messages.
 
