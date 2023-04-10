@@ -15,7 +15,7 @@ exports.create_message_post = [
     .withMessage("Title is required."),
   body("content")
     .trim()
-    .isLength({ min: 1, max: 250 })
+    .isLength({ min: 1, max: 1000 })
     .escape()
     .withMessage("Content is required."),
   // Process request after validation and sanitization.
