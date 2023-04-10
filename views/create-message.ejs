@@ -13,10 +13,21 @@
     <%- include('partials/header') -%>
     <main class="create-message">
         <h1>Submit a new message</h1>
+        <% if (errors) {%>
+            <div class="errors">
+                <ul class="errors">
+                    <% errors.forEach((error)=> {%>
+                        <li>
+                            <%= error.msg %>
+                        </li>
+                    <%}) %>
+                </ul>
+            </div>
+        <%}%>
         <section class="form-container">
             <form method="post" action="" class="create-message-form">
                 <input name="title" placeholder="title" type="text" required="true" maxlength="100" />
-                <textarea name="content" placeholder="content" type="text" required="true" maxlength="1000" rows="4" cols="50"></textarea>
+                <textarea name="content" placeholder="content" type="text" required="true" maxlength="250" rows="4" cols="50"></textarea>
                 <button>Submit</button>
             </form>
         </section>
