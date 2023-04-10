@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+</head>
+
+<body>
+    <%- include('partials/header') -%>
+        <main class="log-in">
+            <h1>Log in as a test user</h1>
+            <section class="form-container">
+                <form action="" method="POST" class="login-form">
+                    <input name="username" placeholder="username" type="text" value="testuser"/>
+                    <input name="password" placeholder="password" type="password" value="testuser"/>
+                    <button>Log in</button>
+                </form>
+                <p>I want to sign up myself<a href="/sign-up"><button>Sign Up</button></a></p>
+            </section>
+        </main>
+</body>
+
+</html>
