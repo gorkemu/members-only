@@ -19,9 +19,11 @@ exports.sign_up_post = [
     .isLength({ min: 6 })
     .escape()
     .withMessage("Password must be at least 6 characters long."),
-  check("confirmPassword", "Passwords do not match.")
+  check("confirmPassword")
     .exists()
-    .custom((value, { req }) => value === req.body.password),
+    .custom((value, { req }) => value === req.body.password)
+    .escape()
+    .withMessage("Passwords do not match."),
 
   // Process request after validation and sanitization.
   async (req, res, next) => {
@@ -76,3 +78,28 @@ exports.logout_get = (req, res, next) => {
     res.redirect("/");
   });
 };
+
+exports.test_login_get = (req, res, next) => {
+  res.render("test-login", { title: "Test Login", errors: false });
+};
+
+exports.test_login_post = [
+  passport.authenticate("local", { failureRedirect: "/test-login" }), // if login fails, redirect to /test-login
+  async (req, res, next) => {
+    const user = await User.findOne({ username: "testuser" });
+    if (user) {
+      user.member = false;
+      user.admin = false;
+      await user.save();
+    } else {
+      const user = new User({
+        username: "testuser",
+        password: "testuser",
+        member: false,
+        admin: false,
+      });
+      await user.save();
+    }
+    res.redirect("/");
+  },
+];
