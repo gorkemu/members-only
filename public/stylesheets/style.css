@@ -146,10 +146,11 @@ input, textarea {
   font: inherit;
   color: #111111;
   margin: 10px;
+  height: 36px;
 }
 
 textarea {
-  height: 150px;
+  height: 200px;
   resize: none;
 }
 .errors {
