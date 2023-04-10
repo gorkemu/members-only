@@ -3,6 +3,7 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
   </head>
   <body>
       <%- include('partials/header') -%>
@@ -10,7 +11,7 @@
       <% if (currentUser) {%>
         <% if (!currentUser.member && !currentUser.admin) {%>
         <section class="become-member">
-          <p>You must be a member to view the authors and dates of messages.</p>
+          <p class="become-member-text">You must be a member to view the authors and dates of messages.</p>
           <a href="/become-member"><button>Become a member</button></a>
         </section>
         <%}
