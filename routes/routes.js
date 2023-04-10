@@ -13,6 +13,11 @@ router.get("/login", authController.login_get);
 /* POST Login */
 router.post("/login", authController.login_post);
 
+/* GET Test Login */
+router.get("/test-login", authController.test_login_get);
+/* POST Test Login */
+router.post("/test-login", authController.test_login_post);
+
 /* GET Sign Up */
 router.get("/sign-up", authController.sign_up_get);
 /* POST Sign Up */
