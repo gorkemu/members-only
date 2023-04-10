@@ -164,3 +164,31 @@ textarea {
 .delete-message-btn {
   margin: 2px 0;
 }
+
+.become-member-text {
+  text-align: center;
+}
+@media screen and (max-width: 400px ) {
+
+  .form-container {
+    width: 100%;
+  }
+
+  .signup-form,
+    .login-form,
+    .create-message-form,
+    .become-member-form {
+    width: 100%;
+    padding: 0;
+    }
+
+  .signup, .login, .create-message, .become-member {
+    width: 100%;
+    padding: 10px;
+  }
+
+  input, textarea, button {
+    margin: 10px 0;
+  }
+}
+  
