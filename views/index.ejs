@@ -40,7 +40,7 @@
                   <button class="delete-message-btn">Delete</button>
                 </form>
                 <%} %>
-              <% if (message.user._id.toString() === currentUser._id.toString()) {%>
+              <% if (message.user._id.toString() === currentUser._id.toString() && !currentUser.admin) {%>
                 <form action="/message/<%= message._id %>/user-delete" method="POST" class="delete-message-form">
                   <input type="hidden" name="messageId" value="<%= message._id %>" />
                   <button class="delete-message-btn">Delete</button>
