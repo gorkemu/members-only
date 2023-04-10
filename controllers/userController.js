@@ -3,7 +3,7 @@ const { body, validationResult } = require("express-validator");
 
 exports.become_member_get = (req, res, next) => {
   if (!res.locals.currentUser) res.redirect("/login");
-  res.render("become-member", { title: "Become Member" });
+  res.render("become-member", { title: "Become Member", errors: false });
 };
 
 exports.become_member_post = [
@@ -26,6 +26,13 @@ exports.become_member_post = [
         user.member = true;
         await user.save();
         res.redirect("/");
+      } else {
+        res.render("become-member", {
+          title: "Become Member",
+          errors: [
+            { msg: "Incorrect code. Try something simple (i.e. 'secretcode')" },
+          ],
+        });
       }
     } catch (err) {
       return next(err);
