@@ -1,7 +1,7 @@
 const User = require("../models/userModel");
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
-const { body, validationResult } = require("express-validator");
+const { body, check, validationResult } = require("express-validator");
 
 exports.sign_up_get = (req, res, next) => {
   res.render("sign-up", { title: "Sign Up", errors: false });
@@ -19,6 +19,9 @@ exports.sign_up_post = [
     .isLength({ min: 6 })
     .escape()
     .withMessage("Password must be at least 6 characters long."),
+  check("confirmPassword", "Passwords do not match.")
+    .exists()
+    .custom((value, { req }) => value === req.body.password),
 
   // Process request after validation and sanitization.
   async (req, res, next) => {
@@ -60,7 +63,7 @@ exports.sign_up_post = [
 
 exports.login_get = (req, res, next) => {
   if (res.locals.currentUser) return res.redirect("/");
-  res.render("login", { title: "Login" });
+  res.render("login", { title: "Login", errors: false });
 };
 
 exports.login_post = passport.authenticate("local", {
