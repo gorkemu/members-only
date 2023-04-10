@@ -3,7 +3,7 @@ const { body, validationResult } = require("express-validator");
 
 exports.create_message_get = (req, res, next) => {
   if (!res.locals.currentUser) res.redirect("/login");
-  res.render("create-message", { title: "Create Message" });
+  res.render("create-message", { title: "Create Message", errors: false });
 };
 
 exports.create_message_post = [
@@ -15,7 +15,7 @@ exports.create_message_post = [
     .withMessage("Title is required."),
   body("content")
     .trim()
-    .isLength({ min: 1 })
+    .isLength({ min: 1, max: 250 })
     .escape()
     .withMessage("Content is required."),
   // Process request after validation and sanitization.
