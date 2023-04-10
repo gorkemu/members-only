@@ -13,6 +13,17 @@
     <%- include('partials/header') -%>
     <main class="become-member">
         <h1>Enter your member code</h1>
+        <% if (errors) {%>
+            <div class="errors">
+                <ul class="errors">
+                    <% errors.forEach((error)=> {%>
+                        <li>
+                            <%= error.msg %>
+                        </li>
+                    <%}) %>
+                </ul>
+            </div>
+        <%}%>
         <section class="form-container">
             <form method="post" action="" class="become-member-form">
                 <input name="member_code" placeholder="Enter member code" type="password" required="true" maxlength="100" />
