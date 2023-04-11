@@ -4,6 +4,8 @@
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
   </head>
   <body>
       <%- include('partials/header') -%>
@@ -27,8 +29,8 @@
         <section class="messages">
           <% messages.forEach((message)=> {%>
             <article class="message">
-              <h2 class="message-title"><%= message.title %></h2>
-              <p class="message-content"><%= message.content %></p>
+              <h2 class="message-title"><%- message.title %></h2>
+              <p class="message-content"><%- message.content %></p>
               <% if (currentUser.member || currentUser.admin) { %>
                 <div class="message-details"><span>
                     submitted <%= message.timestamp_ago %> by <%= message.user.username %>
