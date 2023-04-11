@@ -9,7 +9,7 @@ Message board app with session-based authentication using Passport.js, Mongoose,
 ## Features
 
 - Register to view, post, delete messages.
-- Become a member entering the secret code and see other information like usernames and date of messages.
+- Become a member to see other information like usernames and date of messages.
 - Admin can view all information and delete messages.
 
 ## Licence
