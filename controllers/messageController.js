@@ -15,9 +15,11 @@ exports.create_message_post = [
     .withMessage("Title is required."),
   body("content")
     .trim()
-    .isLength({ min: 1, max: 1000 })
+    .isLength({ min: 1 })
     .escape()
-    .withMessage("Content is required."),
+    .withMessage("Content is required.")
+    .isLength({ max: 1000 })
+    .withMessage("Content must be less than 1000 characters."),
   // Process request after validation and sanitization.
   async (req, res, next) => {
     const errors = validationResult(req);
