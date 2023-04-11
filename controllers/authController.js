@@ -68,10 +68,50 @@ exports.login_get = (req, res, next) => {
   res.render("login", { title: "Login", errors: false });
 };
 
-exports.login_post = passport.authenticate("local", {
-  successRedirect: "/",
-  failureRedirect: "/login",
-});
+// exports.login_post = passport.authenticate("local", {
+//   successRedirect: "/",
+//   failureRedirect: "/login",
+// });
+exports.login_post = [
+  // Validate and sanitize fields.
+  body("username")
+    .trim()
+    .isLength({ min: 1 })
+    .escape()
+    .withMessage("Username is required."),
+  body("password")
+    .trim()
+    .isLength({ min: 1 })
+    .escape()
+    .withMessage("Password is required."),
+  // Process request after validation and sanitization.
+  async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      // There are errors. Render form again with sanitized values/errors messages.
+      res.render("login", { title: "Login", errors: errors.array() });
+      return;
+    }
+    passport.authenticate("local", (err, user, info) => {
+      if (err) {
+        return next(err);
+      }
+      if (!user) {
+        res.render("login", {
+          title: "Login",
+          errors: [{ msg: "Invalid username or password." }],
+        });
+        return;
+      }
+      req.logIn(user, function (err) {
+        if (err) {
+          return next(err);
+        }
+        return res.redirect("/");
+      });
+    })(req, res, next);
+  },
+];
 
 exports.logout_get = (req, res, next) => {
   req.logout(() => {
@@ -84,7 +124,7 @@ exports.test_login_get = (req, res, next) => {
 };
 
 exports.test_login_post = [
-  passport.authenticate("local", { failureRedirect: "/test-login" }), // if login fails, redirect to /test-login
+  passport.authenticate("local", { failureRedirect: "/test-login" }),
   async (req, res, next) => {
     const user = await User.findOne({ username: "testuser" });
     if (user) {
