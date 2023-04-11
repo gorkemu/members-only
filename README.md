@@ -4,10 +4,10 @@
 
 ## Description
 
-A basic Express app using passport.js, bcrypt, Mongoose and EJS.
+Message board app with session-based authentication using Passport.js, Mongoose, bcryptjs, express-validator and EJS
 
-- Registered users can post messages, delete their own messages, see the title and content of other users.
-- Users who enter secret code become member and see other information like usernames and date of messages.
+- Register to view, post, delete messages.
+- Become a member entering the secret code and see other information like usernames and date of messages.
 - Admin can view all information and delete messages.
 
 ## Licence
